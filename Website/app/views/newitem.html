@@ -1,0 +1,49 @@
+  <div class="center" class="background-color">
+    <h2>New workitem</h2>
+
+    <!-- Workitems input -->
+   <form class="center" role="form" ng-submit="createWorkitem()">
+      <div class="row">
+        <div class="input-group">
+          <label for="name">Workitems name</label>
+          <input type="text" ng-model="work.name" placeholder="Name" class="form-control">
+        </div>
+        <div class="input-group">
+          <label for="description">Description</label>
+          <input type="text" ng-model="work.description" placeholder="Description" class="form-control">
+        </div>
+         <div class="input-group">
+          <label for="status">Status</label>
+          <input type="text" ng-model="work.status" placeholder="Backlog, InProgress, Test or Done" class="form-  control">
+        </div>
+         <div class="input-group">
+          <label for="priority">Priority</label>
+          <input type="number" ng-model="work.priority" placeholder="from 1 to 10" class="form-control">
+        </div>
+     
+       <div>
+        <span class="input-group-btn">
+            <input type="submit" class="btn btn-primary" value="Save" ng-disabled="testForm.$dirty &&   testForm.$invalid" ng-click="add">
+          </span>
+        </div>
+      </div>
+      {{work}}
+    </form>
+
+      <!-- Workitems list -->
+    
+  <!--{{workitem}}
+      <p class="form-group" ng-repeat="workitem in workitems">
+        <!--<input type="text" ng-model="workitem" class="form-control">
+     
+        <span class="input-group-btn">
+          <button class="btn btn-green" ng-click="updateWorkitem($index)" aria-label="Update">Update</button>
+          <button class="btn btn-danger" ng-click="removeWorkitem($index)" aria-label="Remove">Remove</button>
+        </span>
+         {{workitem}} <br/>
+        {{workitem.name}}<br/>
+        {{workitem.description}}<br/>
+         {{workitem.status}}<br/>
+         {{workitem.priority}}<br/>
+      </p>-->
+  </div>

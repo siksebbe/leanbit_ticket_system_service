@@ -1,0 +1,126 @@
+<div class="center-content font-pen">
+  <h1 class="center-text">Leanbit Ticket system</h1>
+  <br>
+  <div class="row" ng-controller="LoginCtrl">
+    <button class="btn btn-primary" type="button" ng-click="logout()">
+      <h4>Logout</h4>
+    </button>
+  </div>
+   <div class="row" ng-controller="WorkitemCtrl">
+   <div class="row color-white">
+      Team name: {{users[0].teamName}}<br>
+      <div class="col-lg-4 color-white" ng-repeat="user in users">
+        User: {{user.firstName}} {{user.lastName}}
+      </div>
+  </div>
+   <div ui-sortable>
+    <div class="col-lg-3" ng-repeat="col in categories">
+      <h1 class="movable">
+      {{col}} <span class="glyphicon glyphicon-plus-sign clickable" ng-click='addNewWorkItemPopup(col)'></span>
+      </h1>
+          <div ui-sortable="sortableOptionsList[col]" id="{{col}}" class="apps-container">
+          <div id="{{$index}}" class="post-it-note" ng-repeat="workitem in workItems | filter:col:strict | orderBy: 'priority'">
+            <br>
+            <br>
+            <div class="row">
+              <div class="col-lg-10">
+                <span class="glyphicon glyphicon-remove clickable" ng-click="deleteWorkItemButton({{workitem}})"></span>
+                </div>
+                <div class="col-lg-1">
+                  <span class="glyphicon glyphicon-cog clickable" ng-click="modifyWorkItemPopup({{workitem}})"></span>
+                </div>
+              </div>
+            <h2 class="inline">{{workitem.name}}</h2>
+            <div class="row">
+            </div>
+                        <span class="center-text">
+            
+            <p class="center-text" ng-repeat="user in getWorkitemUsers(workitem.name, users)">
+                                  {{user.userName}}: Authur<br>
+                                  Prioritet: {{workitem.priority}}
+            
+            <br>
+            <br>
+            {{workitem.description}}
+            </p>
+            </span>
+         </div>
+    </div>
+             </div>
+   </div>
+
+<!--    <span class="input-group-addon" id="basic-addon1">@</span>
+  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"> -->
+
+   <div id="popup" class="popup-content" ng-controller="WorkitemCtrl">
+   <div class="row">
+     <div class="col-lg-3">
+          <span class="clickable" ng-click='closeAddNewWorkItemPopup();'>Close</span>
+      </div>
+      <div class="col-lg-8">
+        Add new work item
+      </div>
+    </div>
+    
+    <!-- Workitems input -->
+   <form  name="inputForm" class="center" role="form" ng-submit="createWorkItem();closeAddNewWorkItemPopup();">
+      <div class="row">
+        <div class="input-group col-xs-12">
+          <span class="input-group-addon form-text-description-size">Name</span>
+          <input name="name" class="form-control" type="text" ng-model="work.name" placeholder="Name" id="workitemName" required/>    
+        </div>
+      </div>
+       <div class="row">
+         <div class="input-group col-xs-12">
+          <span class="input-group-addon form-text-description-size">Descripton</span>    
+          <textarea name="description" class="form-control" rows="5" ng-model="work.description" id="workitemDescription"placeholder="Description" required/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group col-xs-12">
+          <span class="input-group-addon form-text-description-size">Status</span>
+          <select type="text" ng-model="work.status" class="form-control" id="workitemStatusSelection">
+              <option ng-repeat="col in categories" value='{{col}}'>{{col}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group col-xs-12">
+          <span class="input-group-addon form-text-description-size">User</span>
+          <select type="text" ng-model="workitem.user" class="form-control" id="useritemUserSelection">
+              <option ng-repeat="user in users" value='{{user.userID}}' ng-model="work.user">{{user.firstName}} {{user.lastName}}</option>
+          </select>
+        </div>
+      </div>   
+      <div class="row">
+        <div class="input-group col-xs-12">
+          <span class="input-group-addon form-text-description-size">Priority</span>
+            <input name="priority" type="number" ng-model="work.priority" placeholder="from 0 to 10" class="form-control" min="0" max="10" id="workitemPriority"required/>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="input-group col-xs-12">
+            <input type="submit" class="btn btn-primary fill-width" 
+            value="Save" ng-disabled="inputForm.$dirty && inputForm.$invalid"> 
+        </div>
+      </div>
+      </form>
+    </div>
+   <!--
+     <div ng-repeat="d1 in show">
+        <div class="col-lg-3">
+          <h1>{{d1.name}}</h1>
+          <div ui-sortable>
+          <div class="post-it-note" ng-repeat="d2 in d1.data">
+            <br>
+            <h2 class="center-text">{{$index}} {{d2.title}}</h2>
+            <p class="center-text">{{$index}} {{d2.authur}}</p>
+            <br>
+            <br>
+            {{d2.message}}
+         </div>
+         </div>
+     </div>
+   </div>
+   -->
+</div>
